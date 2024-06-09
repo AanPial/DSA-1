@@ -12,7 +12,7 @@ int main()
     err:
         printf("\n\nMax Size of SAL is set to %d\n", n);
         printf("\nMenu : ");
-        printf("\n1.Insert \n2.Update\n3.Search\n4.Print\n5.Delete (bonus)\n6.Print Current Array\n0.EXIT");
+        printf("\n1.Insert \n2.Update\n3.Search\n4.Print\n5.Delete (bonus)\n6.Print Current Array\n7.Delete occurence\n8.Bubble sort\n0.EXIT");
         printf("\n\nEnter choice : ");
         scanf("%d", &choice);
 
@@ -26,7 +26,12 @@ int main()
             scanf("%d", &new_val);
             printf("\nEnter the position (index) to insert(current array length is: %d, so choose an index between 0 and %d): ", i, i);
             scanf("%d", &pos);
-            if (i < n)
+            if(pos<0 || pos>n || pos>i+1 || n == i)
+            {
+                 printf("Out of Bound");
+                 goto err;
+            }
+            else if (i < n)
             {
                 printf("%d inserted at index %d\n", new_val, pos);
                 if (pos == i)
@@ -128,6 +133,72 @@ int main()
                 printf("%d ", arr[j]);
             }
         }
+        else if(choice == 7)
+        {
+            printf("Enter value to delete : ");
+            scanf("%d",&new_val);
+            printf("Enter occurance to delete : ");
+            scanf("%d",&pos);
+            flag=0;
+            int x=0;
+            int y;
+            for (int j = 0; j < i; j++)
+            {
+
+                if(new_val == arr[j] )
+                {
+                    x++;
+                    if(x==pos){
+                       flag=1;
+                       y=j;
+                       break;
+                    }
+                }
+
+            }
+            if(flag==1)
+            {
+                printf("\nDeleted from position %d\n", pos);
+                for (int j = y; j < i; j++)
+                {
+                    arr[j] = arr[j + 1];
+                }
+                i--;
+            }
+            else
+            {
+                printf("Occurance doesn't exist .\n");
+                goto err;
+            }
+            printf("\nThe current array list is:");
+            for (int j = 0; j < i; j++)
+            {
+                printf("%d ", arr[j]);
+            }
+        }
+        else if (choice == 8)
+        {
+            printf("Sorted by bubble sort Algorithm.\n");
+            int temp;
+            for(int j=0;j<i;j++)
+            {
+                for(int k=0;k<i;k++)
+                {
+                    if(arr[k]>arr[k+1])
+                    {
+                        temp=arr[k];
+                        arr[k]=arr[k+1];
+                        arr[k+1]=temp;
+                    }
+                }
+            }
+            printf("\nThe current array list is:");
+            for (int j = 0; j < i; j++)
+            {
+                printf("%d ", arr[j]);
+            }
+        }
+        
         else
         {
             printf("\nWrong Choice. Enter again.\n\n");
