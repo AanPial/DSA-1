@@ -30,28 +30,53 @@ void bubblesort(int *arr, int i)
         }
     }
 }
-int binarysrch(int *arr,int i,int sd)
+int binarysrch(int *arr, int i, int sd)
 {
-    int l=0,r=i-1;
-    
+    int l = 0, r = i - 1;
 
-    while(l<=r)
+    while (l <= r)
     {
-        int mid=(l+r)/2;
-        if(arr[mid]==sd)
+        int mid = (l + r) / 2;
+        if (arr[mid] == sd)
         {
             return mid;
         }
-        else if(arr[mid]<sd)
+        else if (arr[mid] < sd)
         {
-            l=mid+1;
+            l = mid + 1;
         }
         else
         {
-            r=mid-1;
+            r = mid - 1;
         }
     }
     return -1;
+}
+void reversearray(int arr[], int i)
+{
+    printf("After reverse : ");
+    for (int j = i - 1; j >= 0; j--)
+    {
+        printf("%d ", arr[j]);
+    }
+}    
+void median(int arr[], int i)
+{
+    bubblesort(arr, i);
+    int l=0, r=i, m, n;
+
+    if (i % 2 == 0)
+    {
+        m = (l + r) / 2;
+        printf("Median is : %d", arr[m]);
+    }
+    else
+    {
+        m = ((l + r) / 2);
+        n = m + 1;
+        float x = (arr[m] + arr[n]) / 2.0;
+        printf("Median is : %f", x);
+    }
 }
 int main()
 {
@@ -66,7 +91,7 @@ int main()
     err:
         printf("\nMenu : \n");
         printf("1.Print Entire array (index 0 to len)\n2.Access a specific index\n3.Update the value of a specific index\n4.Linear Search\n5.Insert new value at a specific indexn\n6.Delete from an index");
-        printf("\n7.Delete nth occurrence of a value\n8.Bubble Sort the existing array\n9.Binary Search on the array\n10.EXIT\n");
+        printf("\n7.Delete nth occurrence of a value\n8.Bubble Sort the existing array\n9.Binary Search on the array\n10.EXIT\n11.Reverse the array\n12.Median of the array\n");
         printf("\nEnter choice: ");
         scanf("%d", &choice);
 
@@ -212,15 +237,15 @@ int main()
             bubblesort(arr, i);
             print(arr, i);
         }
-        else if(choice == 9)
+        else if (choice == 9)
         {
             printf("\nEnter the Search Key for binary search: ");
             scanf("%d", &s_val);
-            bubblesort(arr,i);
+            bubblesort(arr, i);
             printf("\nSorted by bubble sort Algorithm.");
             print(arr, i);
-            int x=binarysrch(arr,i,s_val);
-            if(x == -1)
+            int x = binarysrch(arr, i, s_val);
+            if (x == -1)
             {
                 printf("\nThe search key is not in the array\n");
             }
@@ -233,6 +258,14 @@ int main()
         {
             printf("Exited!");
             break;
+        }
+        else if (choice == 11)
+        {
+            reversearray(arr, i);
+        }
+        else if (choice == 12)
+        {
+            median(arr, i-1);
         }
         else
         {
