@@ -8,7 +8,7 @@ struct node
 };
 struct node *head = NULL;
 struct node *tail = NULL;
-int count=0;
+int count = 0;
 void ftraversal()
 {
     struct node *t = head;
@@ -87,14 +87,14 @@ void insertMid1(int newVal, int n)
     struct node *newnode = (struct node *)malloc(sizeof(struct node));
     newnode->value = newVal;
     struct node *temp = head;
-    while (temp!=NULL && temp->value != n )
+    while (temp != NULL && temp->value != n)
     {
         temp = temp->next;
     }
     if (temp == NULL)
     {
         printf("\nValue doesnt exist.\n");
-        free(newnode); 
+        free(newnode);
         return;
     }
     if (temp->next == NULL)
@@ -114,64 +114,136 @@ void insertMid1(int newVal, int n)
         count++;
     }
 }
-void insertMid2(int newVal,int n)
+void insertMid2(int newVal, int n)
 {
-   if (n > count || n < 0)
+    if (n > count || n < 0)
     {
         printf("\nIncorrect position.\n");
         return;
     }
-    if(head == NULL)
+    if (head == NULL)
     {
         printf("\nEmpty couldn't be instead.\n");
         return;
     }
-    struct node*newnode=(struct node*)malloc(sizeof(struct node));
-    struct node*temp=head;
-    newnode->value=newVal;
-    for(int i=0;i<n;i++)
+    struct node *newnode = (struct node *)malloc(sizeof(struct node));
+    struct node *temp = head;
+    newnode->value = newVal;
+    for (int i = 0; i < n; i++)
     {
-        temp=temp->next;
+        temp = temp->next;
     }
-    if(temp->next==NULL)
+    if (temp->next == NULL)
     {
-        newnode->prev =temp->prev;
-        temp->prev->next=newnode;
-        newnode->next=temp;
-        temp->prev=newnode;
+        newnode->prev = temp->prev;
+        temp->prev->next = newnode;
+        newnode->next = temp;
+        temp->prev = newnode;
         count++;
     }
     else
     {
-         newnode->next = temp;
+        newnode->next = temp;
         newnode->prev = temp->prev;
-        if (temp->prev != NULL) {
+        if (temp->prev != NULL)
+        {
             temp->prev->next = newnode;
-        } else {
-            head = newnode;  
+        }
+        else
+        {
+            head = newnode;
         }
         temp->prev = newnode;
     }
 }
-void deletenode(struct node* temp)
+void deletenode(struct node *temp)
 {
-    if(temp==head)
+    if (temp == head)
     {
-        head=head->next;
+        head = head->next;
     }
-    if(temp->next!=NULL)
+    if (temp->next != NULL)
     {
-        temp->next->prev=temp->prev;
+        temp->next->prev = temp->prev;
     }
-    if(temp->prev!=NULL)
+    if (temp->prev != NULL)
     {
-        temp->prev->next=temp->next;
+        temp->prev->next = temp->next;
     }
-    if(temp==tail)
+    if (temp == tail)
     {
-        tail=temp->prev;
+        tail = temp->prev;
     }
     free(temp);
+    count--;
+    return;
+}
+void search(int newVal)
+{
+    int c = 0;
+    if (head == NULL)
+    {
+        printf("\nLinkedlist is empty.\n");
+        return;
+    }
+    struct node *temp = head;
+    while (temp != NULL && temp->value != newVal)
+    {
+        temp = temp->next;
+        c++;
+    }
+    if (temp == NULL)
+    {
+        printf("\nDoesn't exist in Linked list.\n");
+    }
+    else
+    {
+        printf("\nValue exist at %d index position.\n", c);
+    }
+    return;
+}
+int length()
+{
+    int c = 0;
+    if (head == NULL)
+    {
+        return 0;
+    }
+    struct node *temp = head;
+    while (temp != NULL)
+    {
+        temp = temp->next;
+        c++;
+    }
+    return c;
+}
+void median(int n)
+{
+    if (head == NULL)
+    {
+        printf("\nValue doesnt exist.\n");
+        return;
+    }
+    struct node *temp = head;
+    double median;
+    if (n == 1)
+    {
+        printf("\nMedian = %d\n", temp->value);
+        return;
+    }
+    for (int i = 0; i < (n-1)/2; i++)
+    {
+        temp = temp->next;
+    }
+    if (n % 2 != 0)
+    {
+        median = temp->value;
+    }
+    else
+    {
+        median = (temp->value + temp->next->value) / 2.0;
+    }
+    printf("\nMedian = %.1lf\n", median);
     return;
 }
 int main()
@@ -181,7 +253,7 @@ int main()
     {
     err:
         printf("\n\n1. F Traversal\n2. B Traversal \n3. Insert First \n4. Insert Last \n5. Insert After a val \n6. Insert at a middle pos \n");
-        printf("7. Delete \n8. Search \n9. Your custom function!  \n10. EXIT\nEnter choice: ");
+        printf("7. Delete \n8. Search \n9. Find Median of the Linked List(My custom function!)  \n10. EXIT\nEnter choice: ");
         scanf("%d", &choice);
         if (choice == 1)
         {
@@ -214,21 +286,21 @@ int main()
         else if (choice == 6)
         {
             printf("Enter value to insert   : ");
-            scanf("%d",&newVal);
+            scanf("%d", &newVal);
             printf("Enter index postion to enter : ");
-            scanf("%d",&n);
-            insertMid2(newVal,n);
+            scanf("%d", &n);
+            insertMid2(newVal, n);
         }
         else if (choice == 7)
         {
             printf("Enter value to delete : ");
-            scanf("%d",&newVal);
-            struct node*temp=head;
-            while(temp!=NULL && temp->value!=newVal)
+            scanf("%d", &newVal);
+            struct node *temp = head;
+            while (temp != NULL && temp->value != newVal)
             {
-                temp=temp->next;
+                temp = temp->next;
             }
-            if(temp!=NULL)
+            if (temp != NULL)
             {
                 deletenode(temp);
             }
@@ -240,18 +312,20 @@ int main()
         }
         else if (choice == 8)
         {
-            // WRITE APPROPRIATE CODE HERE
+            printf("Enter value for search : ");
+            scanf("%d", &newVal);
+            search(newVal);
         }
         else if (choice == 9)
         {
-            // WRITE APPROPRIATE CODE HERE
+            int n = length();
+            median(n);
         }
 
         else if (choice == 10)
         {
             break;
         }
-
         else
         {
             printf("Wrong choice, enter again");
