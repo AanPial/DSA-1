@@ -17,9 +17,9 @@ void delete(int *arr, int pos, int i)
 void bubblesort(int *arr, int i)
 {
     int temp;
-    for (int j = 0; j < i; j++)
+    for (int j = 0; j < i-1; j++)
     {
-        for (int k = 0; k < i; k++)
+        for (int k = 0; k < i-1; k++)
         {
             if (arr[k] > arr[k + 1])
             {
