@@ -58,7 +58,7 @@ struct BinaryTreeNode*mean(struct BinaryTreeNode* node)
 }
 struct BinaryTreeNode*delete(struct BinaryTreeNode* node,int value)
 {
-    struct BinaryTreeNode*temp=searchNode(root, value);
+    struct BinaryTreeNode*temp=searchNode(node, value);
     if(temp->left==NULL && temp->right==NULL)
     {
         struct BinaryTreeNode*t=temp;
@@ -109,8 +109,9 @@ int main()
     t=mean(root);
     printf("%d\n",t->key);
     
-    t=delete(70);
+    t=delete(root,70);
     printf("%d\n",t->key);
 
 	return 0;
 }
+
