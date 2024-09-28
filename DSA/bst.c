@@ -70,24 +70,28 @@ struct BinaryTreeNode*search(struct BinaryTreeNode*root,int target)
     }
     return search(root->left,target);
 }
-struct BinaryTreeNode*search2(struct BinaryTreeNode*root,int target)
+struct BinaryTreeNode* search2(struct BinaryTreeNode* root, int target)
 {
-    struct BinaryTreeNode*cur;
-    while(root->key!=target)
+    struct BinaryTreeNode* cur = NULL;  // Store the node if the target is found
+    while(root != NULL)
     {
-        if(target>root->key)
+        if(target == root->key)  // If target is found
         {
-            cur=root;
-            root=root->right;
+            cur = root;  // Store the node
+            break;  // Exit the loop
         }
-        else if(target<root->key)
+        else if(target > root->key)  // Go to the right subtree
         {
-            cur=root;
-            root=root->left;
+            root = root->right;
         }
-        return cur;
+        else  // Go to the left subtree
+        {
+            root = root->left;
+        }
     }
+    return cur;  // Return the found node, or NULL if not found
 }
+
 struct BinaryTreeNode* min(struct BinaryTreeNode* node)
 {
     if(node == NULL || node->left==NULL)
