@@ -263,7 +263,7 @@ int countLeaves(struct BinaryTreeNode *node)
     }
     return countLeaves(node->left) + countLeaves(node->right); // Recursively count leaves in both subtrees
 }
-int max(int a, int b)
+int max2(int a, int b)
 {
     return (a > b) ? a : b;
 }
@@ -278,7 +278,7 @@ int height(struct BinaryTreeNode *node)
         int leftHeight = height(node->left);
         int rightHeight = height(node->right);
 
-        return max(leftHeight, rightHeight) + 1;
+        return max2(leftHeight, rightHeight) + 1;
     }
 }
 
